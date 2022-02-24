@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber"
-import { OrbitControls, Html, useProgress } from "@react-three/drei"
+import { OrbitControls, Html, useProgress, Environment } from "@react-three/drei"
 import House from "./models/House"
 import Tree from "./models/Tree"
 import Bench from "./models/Bench"
@@ -25,22 +25,12 @@ function App() {
       <Canvas frameloop="demand" shadowMap colorManagement camera={{ position: [-5, 2, 10], fov: 60 }}>
         <Suspense fallback={<Loader />}>
           <OrbitControls />
-          <ambientLight intensity={0.5} castShadow />
+          <Environment background={true} preset={"sunset"} />
           <directionalLight
             castShadow
             position={[2.5, 8, 5]}
-            intensity={1.5}
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            shadow-camera-far={50}
-            shadow-camera-left={-10}
-            shadow-camera-right={10}
-            shadow-camera-top={10}
-            shadow-camera-bottom={-10}
+            intensity={1}
           />
-          <Plane receiveShadow rotation-x={-Math.PI / 2} position={[0, -0.5, 0]} args={[10, 10, 4, 4]}>
-            <shadowMaterial attach="material" opacity={0.5} />
-          </Plane>
           <Plane rotation-x={-Math.PI / 2} position={[0, -0.5, 0]} args={[10, 10, 4, 4]}>
             <meshBasicMaterial attach="material" opacity={0.5} />
           </Plane>
